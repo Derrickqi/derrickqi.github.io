@@ -1,10 +1,10 @@
 # Site settings
-title: BY Blog                      #你博客的标题
-SEOTitle: 齐浩的博客 | BY Blog       #显示在浏览器上搜索的时候显示的标题
+title: Derrick Blog                      #你博客的标题
+SEOTitle: 齐浩的博客 | Derrick Blog       #显示在浏览器上搜索的时候显示的标题
 header-img: img/post-bg-desk.jpg    #显示在首页的背景图片
 email: seven_num@163.com
 description: "Every failure is leading towards success."  #网站介绍
-keyword: "BY, BY Blog, 齐浩的博客, SeVen7nu, 齐浩, shell, python, Linux" #关键词
+keyword: "Derrick, Derrick Blog, 齐浩的博客, SeVen7nu, 齐浩, shell, python, Linux" #关键词
 url: "http://SeVen7nu.github.io"          # your host, for absolute URL # 这个就是填写你的博客地址
 baseurl: ""      # for example, '/blog' if your blog hosted on 'host/blog'
 github_repo: "https://github.com/SeVen7nu/SeVen7nu.github.io.git" # you code repository
@@ -101,7 +101,7 @@ service-worker: true
 #        title: "WY",
 #        href: "http://zhengwuyang.com"
 #    },{
-#        title: "简书·BY",
+#        title: "简书·Derrick",
 #        href: "http://www.jianshu.com/u/e71990ada2fd"
 #    },{
 #        title: "Apple",
