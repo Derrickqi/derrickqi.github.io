@@ -4,7 +4,7 @@ title:      LVS-NAT 和 Nginx 的区别
 subtitle:   负载均衡的搭建
 date:       2020-03-20
 author:     Derrick
-header-img: img/post-bg-4.jpg
+header-img: img/post-bg-desk.jpg
 catalog: true
 tags:
     - Linux
@@ -19,15 +19,13 @@ tags:
     **LVS**负载能力强，因为其工作方式逻辑非常简单，仅进行请求分发，而且工作在网络的第4层即`传输层`，所以**LVS**可以对几乎所有应用进行负载均衡，包括Web、数据库等。
     **LVS**有三种工作模式
     
->1.  `VS/NAT`
+>1. `VS/NAT`
     -   通过网络地址转换实现的虚拟服务器
     -   大并发访问时，调度器的性能成为瓶颈
-
->2.  `VS/DR`
+>2. `VS/DR`
     -   直接使用路由技术实现虚拟服务器
     -   节点服务器需要配置VIP，注意MAV地址广播
-
->3.  `VS/TUN`
+>3. `VS/TUN`
     -   通过隧道方式实现虚拟服务器
 
 -   **Nginx**
@@ -41,9 +39,11 @@ tags:
    |web1 ip|192.168.2.100|
    |web2 ip |192.168.2.200|
 
+	[root@web\~]\# yum -y install httpd [root@web\~]\# echo "192.168.2.100/200" \> /var/www/html/index.html 
+	[root@web\~]\# yum -y install httpd [root@web\~]\# echo "192.168.2.100/200" \> /var/www/html/index.html 
 **配置基础环境** 
 >1. 准备俩台Web服务器(配置相同，ip分别位100/200)
-    [root@web\~]\# yum -y install httpd [root@web\~]\# echo "192.168.2.100/200" \> /var/www/html/index.html 
+	[root@web\~]\# yum -y install httpd [root@web\~]\# echo "192.168.2.100/200" \> /var/www/html/index.html 
     [root@web\~]\# systemctl
 start httpd **部署LVS-NAT模式调度器** 
 >2. 确认调度器的路由转发功能
