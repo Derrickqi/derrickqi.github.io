@@ -41,18 +41,18 @@ tags:
    |web2 ip |192.168.2.200|
 
 
-#### **配置基础环境** 
+###### **配置基础环境**
 1. 准备俩台Web服务器(配置相同，ip分别位100/200)
  ```
     [root@web ~]# yum -y install httpd 
-    [root@web ~]# echo "192.168.2.100/200" \> /var/www/html/index.html 
+    [root@web ~]# echo "192.168.2.100/200" > /var/www/html/index.html 
     [root@web ~]# systemctl start httpd 
 ```
-#### **部署LVS-NAT模式调度器** 
+###### **部署LVS-NAT模式调度器** 
 2. 确认调度器的路由转发功能
 ```    
-    [root@proxy ~]# echo 1 \> /proc/sys/net/ipv4/ip\_forward 
-    [root@proxy ~]# echo "net.ipv4.ip\_forward = 1" \>\> /etc/sysctl.conf 
+    [root@proxy ~]# echo 1 > /proc/sys/net/ipv4/ip_forward 
+    [root@proxy ~]# echo "net.ipv4.ip_forward = 1" >> /etc/sysctl.conf 
 ```
 3. 创建集群服务器 
 ```    	
@@ -67,7 +67,7 @@ tags:
 5. 查看规则列表，并保存规则 
 ```
    [root@proxy ~]# ipvsadm -Ln 
-   [root@proxy ~]# ipvsadm-save -n \> /etc/sysconfig/ipvsadm 
+   [root@proxy ~]# ipvsadm-save -n > /etc/sysconfig/ipvsadm 
 ```
 6. 客户端测试
 客户端使用curl命令反复连接http://192.168.2.1，查看访问的页面是否会轮询到不同的后端真实服务器。
@@ -82,7 +82,7 @@ tags:
 1. 准备俩台Web服务器(配置相同，ip分别位100/200)
 ```    
     [root@web ~]# yum -y install httpd 
-    [root@web ~]# echo "192.168.2.100/200" \> /var/www/html/index.html 
+    [root@web ~]# echo "192.168.2.100/200" > /var/www/html/index.html 
     [root@web ~]# systemctl start httpd
 ```
 2. 在proxy代理服务器上安装(跳过)并编译Nginx(`with-stream`为反向代理模块)
