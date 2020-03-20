@@ -48,14 +48,13 @@ tags:
    |web2 ip |192.168.2.200|
 
 
-###### **配置基础环境**
+
 1. 准备俩台Web服务器(配置相同，ip分别位100/200)
  ```
     [root@web ~]# yum -y install httpd 
     [root@web ~]# echo "192.168.2.100/200" > /var/www/html/index.html 
     [root@web ~]# systemctl start httpd 
 ```
-###### **部署LVS-NAT模式调度器** 
 2. 确认调度器的路由转发功能
 ```    
     [root@proxy ~]# echo 1 > /proc/sys/net/ipv4/ip_forward 
