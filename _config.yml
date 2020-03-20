@@ -1,23 +1,23 @@
 # Site settings
-title: BY Blog
-SEOTitle: 齐浩的博客 | BY Blog
-header-img: img/post-bg-desk.jpg
+title: BY Blog                      #你博客的标题
+SEOTitle: 齐浩的博客 | BY Blog       #显示在浏览器上搜索的时候显示的标题
+header-img: img/post-bg-desk.jpg    #显示在首页的背景图片
 email: seven_num@163.com
-description: "Every failure is leading towards success."
-keyword: "BY, BY Blog, 齐浩的博客, SeVen7nu, 齐浩, shell, python, Linux"
-url: "http://SeVen7nu.github.io"          # your host, for absolute URL
+description: "Every failure is leading towards success."  #网站介绍
+keyword: "BY, BY Blog, 齐浩的博客, SeVen7nu, 齐浩, shell, python, Linux" #关键词
+url: "http://SeVen7nu.github.io"          # your host, for absolute URL # 这个就是填写你的博客地址
 baseurl: ""      # for example, '/blog' if your blog hosted on 'host/blog'
 github_repo: "https://github.com/SeVen7nu/SeVen7nu.github.io.git" # you code repository
 
 # Sidebar settings
-sidebar: true                           # whether or not using Sidebar.
+sidebar: true                           # whether or not using Sidebar.     # 是否开启侧边栏.
 sidebar-about-description: "Goals determine what you going to be!"
-sidebar-avatar: /img/avatar_m.jpg   # use absolute URL, seeing it's used in both `/` and `/about/`
+sidebar-avatar: /img/avatar_m.jpg   # use absolute URL, seeing it's used in both `/` and `/about/`  # 你的个人头像 这里你可以改成我在img文件夹中的两张备用照片
 
 
 
 # SNS settings
-RSS: false
+RSS: false          
 # weibo_username:     qiubaiying
 github_username:    SeVen7nu
 #facebook_username:  baiying.qiu.7
@@ -38,7 +38,7 @@ anchorjs: true                          # if you want to customize anchor. check
 
 # Gems
 # from PR#40, to support local preview for Jekyll 3.0
-gems: [jekyll-paginate]
+#gems: [jekyll-paginate]
 
 
 
