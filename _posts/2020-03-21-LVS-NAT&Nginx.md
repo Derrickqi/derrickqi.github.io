@@ -41,33 +41,33 @@ tags:
    |web2 ip |192.168.2.200|
 
 
-### **配置基础环境** 
+#### **配置基础环境** 
 1. 准备俩台Web服务器(配置相同，ip分别位100/200)
  ```
-    [root@web\~]\# yum -y install httpd 
-    [root@web\~]\# echo "192.168.2.100/200" \> /var/www/html/index.html 
-    [root@web\~]\# systemctl start httpd 
+    [root@web ~]# yum -y install httpd 
+    [root@web ~]# echo "192.168.2.100/200" \> /var/www/html/index.html 
+    [root@web ~]# systemctl start httpd 
 ```
-### **部署LVS-NAT模式调度器** 
+#### **部署LVS-NAT模式调度器** 
 2. 确认调度器的路由转发功能
 ```    
-    [root@proxy \~]\# echo 1 \> /proc/sys/net/ipv4/ip\_forward 
-    [root@proxy \~]\# echo "net.ipv4.ip\_forward = 1" \>\> /etc/sysctl.conf 
+    [root@proxy ~]# echo 1 \> /proc/sys/net/ipv4/ip\_forward 
+    [root@proxy ~]# echo "net.ipv4.ip\_forward = 1" \>\> /etc/sysctl.conf 
 ```
 3. 创建集群服务器 
 ```    	
-    [root@proxy \~]\# yum -y install ipvsadm 
-    [root@proxy \~]\# ipvsadm -A -t 192.168.2.1:80 -s wrr
+    [root@proxy ~]# yum -y install ipvsadm 
+    [root@proxy ~]# ipvsadm -A -t 192.168.2.1:80 -s wrr
 ```
 4. 添加真实服务器 
 ```    
-    [root@proxy \~]\# ipvsadm -a -t 192.168.2.1:80 -r 192.168.2.100 -w 1 -m 
-    [root@proxy \~]\# ipvsadm -a -t 192.168.2.1:80 -r 192.168.2.200 -w 1 -m 
+    [root@proxy ~]# ipvsadm -a -t 192.168.2.1:80 -r 192.168.2.100 -w 1 -m 
+    [root@proxy ~]# ipvsadm -a -t 192.168.2.1:80 -r 192.168.2.200 -w 1 -m 
 ```
 5. 查看规则列表，并保存规则 
 ```
-   [root@proxy \~]\# ipvsadm -Ln 
-   [root@proxy \~]\# ipvsadm-save -n \> /etc/sysconfig/ipvsadm 
+   [root@proxy ~]# ipvsadm -Ln 
+   [root@proxy ~]# ipvsadm-save -n \> /etc/sysconfig/ipvsadm 
 ```
 6. 客户端测试
 客户端使用curl命令反复连接http://192.168.2.1，查看访问的页面是否会轮询到不同的后端真实服务器。
@@ -81,17 +81,17 @@ tags:
    
 1. 准备俩台Web服务器(配置相同，ip分别位100/200)
 ```    
-    [root@web\~]\# yum -y install httpd 
-    [root@web\~]\# echo "192.168.2.100/200" \> /var/www/html/index.html 
-    [root@web\~]\# systemctl start httpd
+    [root@web ~]# yum -y install httpd 
+    [root@web ~]# echo "192.168.2.100/200" \> /var/www/html/index.html 
+    [root@web ~]# systemctl start httpd
 ```
-2. 在proxy代理服务器上安装(跳过)并编译Nginx(with-stream为反向代理模块)
+2. 在proxy代理服务器上安装(跳过)并编译Nginx(`with-stream`为反向代理模块)
 ```
-    [root@proxy \nginx-1.16.1]\# ./config --prefix=/usr/local/nginx --user=nginx --`with-stream`
+    [root@proxy nginx-1.16.1]# ./config --prefix=/usr/local/nginx --user=nginx --with-stream
 ```
 3.  配置nginx均衡 
 ```
-    [root@proxy \~]\# vim /usr/local/nginx/conf/nginx.conf 
+    [root@proxy ~]# vim /usr/local/nginx/conf/nginx.conf 
 
     .
     .
@@ -105,9 +105,10 @@ tags:
     	server_name localhost;   
     	#charset koi8-r;  
     	#access_log /var/log/nginx/host.access.log main;   
-    	location / {  
-    	proxy\_pass http://web;      
-	root   /usr/share/nginx/html;      
+    
+    location / {  
+    	proxy_pass http://web;      
+	root  /usr/share/nginx/html;      
     	index index.html index.htm;  
     }
     .
@@ -115,7 +116,7 @@ tags:
  ```
 4. 启动服务 
 ```
-[root@proxy \~]\# nginx
+[root@proxy ~]# nginx
 ```
 5. 客户端测试
 客户端使用curl命令反复连接http://192.168.2.1，查看访问的页面是否会轮询到不同的后端真实服务器。
