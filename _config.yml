@@ -12,7 +12,7 @@ github_repo: "https://github.com/SeVen7nu/SeVen7nu.github.io.git" # you code rep
 # Sidebar settings
 sidebar: true                           # whether or not using Sidebar.     # 是否开启侧边栏.
 sidebar-about-description: "Goals determine what you going to be!"
-sidebar-avatar: /img/avatar_Drrick.jpg   # use absolute URL, seeing it's used in both `/` and `/about/`  # 你的个人头像 这里你可以改成我在img文件夹中的两张备用照片
+sidebar-avatar: /img/avatar_photo.jpg   # use absolute URL, seeing it's used in both `/` and `/about/`  # 你的个人头像 这里你可以改成我在img文件夹中的两张备用照片
 
 
 
