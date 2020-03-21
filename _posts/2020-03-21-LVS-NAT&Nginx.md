@@ -49,7 +49,7 @@ tags:
 
 
 
-1. 准备俩台Web服务器(配置相同，ip分别位100/200)
+1. 准备俩台Web服务器(配置相同，ip分别为100/200)
  ```
     [root@web ~]# yum -y install httpd 
     [root@web ~]# echo "192.168.2.100/200" > /var/www/html/index.html 
@@ -85,7 +85,7 @@ tags:
    |web1 ip|192.168.2.100|
    |web2 ip |192.168.2.200|
    
-1. 准备俩台Web服务器(配置相同，ip分别位100/200)
+1. 准备俩台Web服务器(配置相同，ip分别为100/200)
 ```    
     [root@web ~]# yum -y install httpd 
     [root@web ~]# echo "192.168.2.100/200" > /var/www/html/index.html 
