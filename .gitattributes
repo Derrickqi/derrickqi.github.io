@@ -1,3 +1,4 @@
 pwa/icons/pwa_icon_128.png filter=lfs diff=lfs merge=lfs -text
 pwa/icons/pwa_icon_512.png filter=lfs diff=lfs merge=lfs -text
 img/apple-touch-icon.png filter=lfs diff=lfs merge=lfs -text
+e3a39ab2ed599d9311337ab26b2170b41b5bb2e9 filter=lfs diff=lfs merge=lfs -text
