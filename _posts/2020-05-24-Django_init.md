@@ -26,6 +26,21 @@ tags:								#标签
     python manage.py startapp AppName
 ```
 
+**在修改setting.py中修改语言及时区**
+```python
+    LANGUAGE_CODE = 'zh-hans'
+
+    TIME_ZONE = 'Asia/Shanghai'
+
+    USE_I18N = True
+
+    USE_L10N = True
+
+    USE_TZ = False
+
+```
+
+
 **修改setting.py**
 在 INSTALLED_APPS的列表中，添加创建的App名字
 ```python
