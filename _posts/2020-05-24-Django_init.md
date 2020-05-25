@@ -100,7 +100,7 @@ tags:								#标签
 ```
 
 **新建index.html**
-```python
+```html
     template/indx.html
 
     {% load staticfiles %}
