@@ -4,7 +4,7 @@ title:      初识Django 				# 标题
 subtitle:   Django的初始化配置       #副标题
 date:       2020-05-24 				# 时间
 author:     Derrick 				# 作者
-header-img: img/post-bg-travel-4.jpg 	#这篇文章标题背景图片
+header-img: img/post-bg-Django.jpg 	#这篇文章标题背景图片
 catalog: true 						# 是否归档
 tags:								#标签
     - Python
@@ -71,4 +71,18 @@ tags:								#标签
         re_path('',include('devops.urls')),
     ]
 
+```
+
+**App下新建urls.py并初始化**
+```python
+    devops/urls.py
+
+    from django.urls import path 
+    from . import views
+    
+    app_name = 'AppName'
+    
+    urlpatterns = [
+        path('index/', views.index, name="index"),
+    ]
 ```
