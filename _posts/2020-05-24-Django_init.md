@@ -57,3 +57,18 @@ tags:								#标签
         os.path.join(BASE_DIR, 'static')
     ]
 ```
+
+**修改项目urls.py**
+`官方文档的内容，如果在urls.py中使用到正则匹配路径（^$）的时候，就需要使用re_path,而不能使用path，不然页面会显示404错误,如果未用到正则，那么使用path即可。`
+```python
+    mysite/urls.py
+
+    from django.contrib import admin
+    from django.urls import path, include, re_path
+    #匹配路由
+    urlpatterns = [
+        path('admin/', admin.site.urls),
+        re_path('',include('devops.urls')),
+    ]
+
+```
