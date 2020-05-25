@@ -48,3 +48,12 @@ tags:								#标签
 
 ```
 
+**在最后添加静态文件配置**
+```python
+    mysite/setting.py
+
+    STATIC_URL = '/static/'
+    STATICFILES_DIRS = [
+        os.path.join(BASE_DIR, 'static')
+    ]
+```
