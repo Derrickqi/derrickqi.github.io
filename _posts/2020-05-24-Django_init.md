@@ -132,6 +132,8 @@ tags:								#标签
     # 设计和表对应得类
     # Create your models here.
     
+
+
     class UserInfo(models.Model):
         gender = (
             ('male', '男'),
@@ -140,8 +142,9 @@ tags:								#标签
         
         """用户模型类"""
         # CharField说明一个字符串， max_length指定字符串最大长度
+
+
         username = models.CharField(max_length=20, unique=True, verbose_name='用户名')
-        # 密码长度
         password = models.CharField(max_length=20, verbose_name='密码')
         email = models.EmailField(unique=True, verbose_name='邮箱')
         sex = models.CharField(max_length=32, choices=gender, default='男', verbose_name='性别')
@@ -173,12 +176,12 @@ tags:								#标签
 
     from django.contrib import admin
     from .models import UserInfo, HostInfo
-        ；
-        ；
     # 后台管理相关文件
     # Register your models here.
-        ；
     # 自定义模型管理类
+
+
+
     class UserInfoAdmin(admin.ModelAdmin):
         """用户模型管理类"""
         list_display = ['id', 'username', 'email', 'c_time']
@@ -190,6 +193,9 @@ tags:								#标签
         
         
     # 注册模型类
+
+
+
     admin.site.register(UserInfo, UserInfoAdmin)
     admin.site.register(HostInfo, HostInfoAdmin)
 ```
