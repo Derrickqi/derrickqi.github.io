@@ -17,6 +17,6 @@ tags:								#标签
 **创建项目文件夹**
 
 ```python
-  django-admin startproject ProjectName
+    django-admin startproject ProjectName
 ```
 
