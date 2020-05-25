@@ -99,3 +99,20 @@ tags:								#标签
 
 ```
 
+**新建index.html**
+```html
+    template/indx.html
+
+    {% load staticfiles %}
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+
+
+    </head>
+    <body>
+        <h1>hello,world</h1>
+    </body>
+    </html>
+
+```
