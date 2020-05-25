@@ -106,3 +106,81 @@ tags:								#标签
     <h1>hello,world</h1>
 
 ```
+
+
+**设计和表对应得类**
+```python
+    devops/models.py
+
+    from django.db import models
+    
+    # 设计和表对应得类
+    # Create your models here.
+    
+    class UserInfo(models.Model):
+        gender = (
+            ('male', '男'),
+            ('female', '女'),
+        )
+        
+        """用户模型类"""
+        # CharField说明一个字符串， max_length指定字符串最大长度
+        username = models.CharField(max_length=20, unique=True, verbose_name='用户名')
+        # 密码长度
+        password = models.CharField(max_length=20, verbose_name='密码')
+        email = models.EmailField(unique=True, verbose_name='邮箱')
+        sex = models.CharField(max_length=32, choices=gender, default='男', verbose_name='性别')
+        c_time = models.DateTimeField(auto_now_add=True)
+        
+        
+    class HostInfo(models.Model):
+        ipstatus_choices = (
+            (0, '空闲中'),
+            (1, '使用中'),
+        )
+        
+        ipaddr = models.CharField(max_length=20, verbose_name="IP地址")
+        ipstatus = models.SmallIntegerField(choices=ipstatus_choices, default='空闲中', verbose_name="IP状态")
+        comment = models.TextField(max_length=256, blank=True, null=True, verbose_name="备注")
+        
+```
+
+**初始化数据库并创建Superuser**
+```python
+    python manage.py migrate
+    python manage.py makemigrations
+    python manage.py createsuperuser
+```
+
+**自定义模型管理类**
+```python
+    mysite/admin.py
+
+    from django.contrib import admin
+    from .models import UserInfo, HostInfo
+        ；
+        ；
+    # 后台管理相关文件
+    # Register your models here.
+        ；
+    # 自定义模型管理类
+    class UserInfoAdmin(admin.ModelAdmin):
+        """用户模型管理类"""
+        list_display = ['id', 'username', 'email', 'c_time']
+        
+        
+    class HostInfoAdmin(admin.ModelAdmin):
+        """服务器模型管理类"""
+        list_display = ['id', 'ipaddr', 'ipstatus', 'comment']
+        
+        
+    # 注册模型类
+    admin.site.register(UserInfo, UserInfoAdmin)
+    admin.site.register(HostInfo, HostInfoAdmin)
+```
+
+**运行测试**
+```python
+    python manage.py runserver
+```
+
