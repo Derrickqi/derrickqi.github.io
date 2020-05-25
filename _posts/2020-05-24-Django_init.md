@@ -35,3 +35,16 @@ tags:								#标签
         'AppName',
         ...
 ```
+
+**修改TEMPLATES中的DIRS，以将前端文件统一放在根目录下的templates中。**
+```python
+    mysite/setting.py
+
+    TEMPLATES = [
+        {
+            'BACKEND': 'django.template.backends.django.DjangoTemplates',
+            'DIRS': [os.path.join(BASE_DIR, "templates")],
+            ...
+
+```
+
