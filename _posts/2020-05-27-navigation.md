@@ -15,8 +15,8 @@ tags:								#标签
 
 
 
-**.justify-content-center类设置导航居中显示，.justify-content-end类设置导航右对齐。
-选项卡.nav-tabs,胶囊导航.nav-pills;当屏幕缩小时，会折叠（.nav导航不会折叠）；使用 class .nav、.nav-pills 的同时使用 class .nav-stacked，让胶囊垂直堆叠。使用 .nav、.nav-tabs 或 .nav、.nav-pills 的同时使用 class .nav-justified，让标签式或胶囊式导航菜单与父元素等宽。**
+**`.justify-content-center`类设置导航居中显示，`.justify-content-end`类设置导航右对齐。
+选项卡`.nav-tabs`,胶囊导航`.nav-pills`;当屏幕缩小时，会折叠（.nav导航不会折叠）；使用 `class .nav、.nav-pills` 的同时使用 class .nav-stacked，让胶囊垂直堆叠。使用 `.nav、.nav-tabs` 或 `.nav、.nav-pills` 的同时使用 `class .nav-justified`，让标签式或胶囊式导航菜单与父元素等宽。**
 
 
 
@@ -52,7 +52,7 @@ tags:								#标签
 
 
 
-**添加 role="navigation"，有助于增加可访问性,向 <div> 元素添加一个标题 class .navbar-header，内部包含了带有 class navbar-brand 的 <a> 元素。这会让文本看起来更大一号。添加.navbar-inverse 使导航栏颜色变为黑色**
+**添加 `role="navigation"`，有助于增加可访问性,向 <div> 元素添加一个标题 `class .navbar-header`，内部包含了带有 `class navbar-brand` 的 <a> 元素。这会让文本看起来更大一号。添加`.navbar-inverse`s 使导航栏颜色变为黑色**
 
 ```html
 	<!DOCTYPE html>
