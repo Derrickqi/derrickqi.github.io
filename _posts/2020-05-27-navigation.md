@@ -54,7 +54,7 @@ tags:								#标签
 
 
 
-**添加 `role="navigation"`，有助于增加可访问性,向 <div> 元素添加一个标题 `class .navbar-header`，内部包含了带有 `class navbar-brand` 的 <a> 元素。这会让文本看起来更大一号。添加`.navbar-inverse`s 使导航栏颜色变为黑色**
+**添加 `role="navigation"`，有助于增加可访问性,向 `<div>` 元素添加一个标题 `class .navbar-header`，内部包含了带有 `class navbar-brand` 的 `<a>` 元素。这会让文本看起来更大一号。添加`.navbar-inverse` 使导航栏颜色变为黑色**
 
 ```html
 	<!DOCTYPE html>
