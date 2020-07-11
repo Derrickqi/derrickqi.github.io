@@ -90,7 +90,7 @@ scrape_configs:
 
 访问master的9090端口
 
-![img](img/2020-07-11-prometheus/prometheus1.png)
+![img](/img/2020-07-11-prometheus/prometheus1.png)
 
 3.部署node_exporter（master和node）
 下载地址https://prometheus.io/download
@@ -121,11 +121,11 @@ tcp6       0      0 :::9100                 :::*                    LISTEN      
 ```
 
 访问master及node端的9100端口
-![img](img/2020-07-11-prometheus/node_exporter1.png)
-![img](img/2020-07-11-prometheus/node_exporter2.png)
+![img](/img/2020-07-11-prometheus/node_exporter1.png)
+![img](/img/2020-07-11-prometheus/node_exporter2.png)
 
 再次访问master的9090端口
-![img](img/2020-07-11-prometheus/prometheus2.png)
+![img](/img/2020-07-11-prometheus/prometheus2.png)
 
 
 
@@ -151,20 +151,20 @@ chmod 777 -R /opt/grafana-storage
 
 访问master的3000端口
 **默认账号密码都为admin**
-![img](img/2020-07-11-prometheus/Grafana1.png)
+![img](/img/2020-07-11-prometheus/Grafana1.png)
 
 **点击设置，将URL改为http://192.168.124.4:9090并保存**
-![img](img/2020-07-11-prometheus/Grafana2.png)
+![img](/img/2020-07-11-prometheus/Grafana2.png)
 
 **点击Import导入默认模板(代码为9276），并且保存**
-![img](img/2020-07-11-prometheus/Grafana3.png)
+![img](/img/2020-07-11-prometheus/Grafana3.png)
 
 
-![img](img/2020-07-11-prometheus/Grafana4.png)
+![img](/img/2020-07-11-prometheus/Grafana4.png)
 
 
 **真香**
-![img](img/2020-07-11-prometheus/Grafana5.png)
+![img](/img/2020-07-11-prometheus/Grafana5.png)
 
 
 
