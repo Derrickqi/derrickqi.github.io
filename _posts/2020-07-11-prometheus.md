@@ -38,7 +38,7 @@ Prometheus目前在开源社区相当活跃。
 
 
 
-1. 准备两台linux操作系统，本文均使用CentOS7版本。
+1.准备两台linux操作系统，本文均使用CentOS7版本。
 
 |  HostName| IP  |
 | :----: | :----: | 
@@ -47,7 +47,7 @@ Prometheus目前在开源社区相当活跃。
 
 
 
-2. Docker部署Prometheus（master机器）
+2.Docker部署Prometheus（master机器）
 
 ```shell
 docker run -d \
@@ -92,7 +92,7 @@ scrape_configs:
 
 ![img](/img/2020-07-11-prometheus/prometheus1.png)
 
-3. 部署node_exporter（master和node）
+3.部署node_exporter（master和node）
 下载地址https://prometheus.io/download
 
 
@@ -132,7 +132,7 @@ tcp6       0      0 :::9100                 :::*                    LISTEN      
 
 
 
-4. Docker部署grafana监控服务
+4.Docker部署grafana监控服务
 
 ```shell
 docker run -d \
@@ -176,7 +176,7 @@ chmod 777 -R /opt/grafana-storage
 `cAdvisor`可以对节点机器上的资源及容器进行实时监控和性能数据采集，包括`CPU使用情况`、`内存使用情况`、`网络吞吐量`及`文件系统使用情况`.
 
 
-1. Docker部署Cadvisor
+1.Docker部署Cadvisor
 
 
 在node节点执行
@@ -205,8 +205,9 @@ google/cadvisor:latest
 
 
 
-2. **修改prometheus.yml,在末尾添加**
+2.**修改prometheus.yml,在末尾添加**
 
+```shell
 .
 .
 .
@@ -216,9 +217,9 @@ google/cadvisor:latest
 .
 .
 .
+```
 
-
-3. **再次访问master的9090端口，可以看到容器监控指标已经显示出来了**
+3.**再次访问master的9090端口，可以看到容器监控指标已经显示出来了**
 ![img](/img/2020-07-11-prometheus/cadvisor4.png)
 
 
