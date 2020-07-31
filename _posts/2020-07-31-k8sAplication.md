@@ -45,13 +45,13 @@ vim /etc/maven/settings.xml
 
 
 
-3. 编译构建(在Java目录下执行)
+3.编译构建(在Java目录下执行)
 ```shell
 mvn clean package -D maven.skip.test=true 
 
 
 参数：
-- maven.skip.test=true : 跳过maven单元检测
+maven.skip.test=true : 跳过maven单元检测
 ```
 
 
