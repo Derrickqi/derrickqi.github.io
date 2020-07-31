@@ -50,6 +50,8 @@ vim /etc/maven/settings.xml
 mvn clean package -D maven.skip.test=true 
 
 
+
+
 参数：
 maven.skip.test=true : 跳过maven单元检测
 ```
