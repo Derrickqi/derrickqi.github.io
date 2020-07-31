@@ -8,6 +8,7 @@ header-img: img/post-bg-view-1.jpg 	#这篇文章标题背景图片
 catalog: true 						# 是否归档
 tags:								#标签
     - Kubernetes
+    - Docker
 ---
 
 ## Kubernetes部署Java项目
@@ -22,19 +23,16 @@ tags:								#标签
 
 
 
-1. 准备编译环境
+1.准备编译环境
 ```shell
 yum -y install java-1.8.0-openjdk maven -y
 ```
 
 
 
-2. 修改Maven镜像源
-```txt
+2.修改Maven镜像源
+```shell
 vim /etc/maven/settings.xml
-.
-.
-.
   <mirrors>
     <mirror>     
       <id>central</id>     
@@ -43,9 +41,6 @@ vim /etc/maven/settings.xml
       <url>https://maven.aliyun.com/repository/public</url>     
     </mirror>
   </mirrors>
-.
-.
-.
 ```
 
 
@@ -65,7 +60,7 @@ mvn clean package -D maven.skip.test=true
 
 
 
-1. 编写dockerfile
+1.编写dockerfile
 ```shell
 vim dockerfile
 
@@ -78,14 +73,14 @@ ADD tartget/*.war /usr/local/tomcat/webapps/ROOT.war
 
 
 
-2. 构建镜像
+2.构建镜像
 ```shell
 docker build -t java-demo:v1 .
 ```
 
 
 
-3. 将镜像推送到自己得私有仓库
+3.将镜像推送到自己得私有仓库
 ```
 #登陆dockerHub
 docker login
@@ -99,7 +94,10 @@ docker tag java-demon:v1 seven7num/java-demon:v1
 
 ## 部署应用到k8s
 
-1. 部署deployment
+
+
+
+1.部署deployment
 ```shell
 #创建应用
 kubectl create deployment web --image=seven7num/java-demon:v1  
@@ -113,7 +111,7 @@ kubectl get pod
 
 
 
-2. 发布应用
+2.发布应用
 ```shell
 #发布应用并暴露端口
 kubectl expose deployment web --port=80 --target-port=8080 --type=NodePort 
