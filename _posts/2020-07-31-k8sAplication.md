@@ -16,9 +16,6 @@ tags:								#标签
 
 
 ### 安装Java环境以及Maven仓库
-
-
-
 准备项目代码————>编译构建————>将产出得wae打到镜像中————>推送镜像仓库
 
 
@@ -58,10 +55,8 @@ maven.skip.test=true : 跳过maven单元检测
 
 
 
+
 ### 镜像制作
-
-
-
 1.编写dockerfile
 ```shell
 vim dockerfile
@@ -95,10 +90,6 @@ docker tag java-demon:v1 seven7num/java-demon:v1
 
 
 ## 部署应用到k8s
-
-
-
-
 1.部署deployment
 ```shell
 #创建应用
