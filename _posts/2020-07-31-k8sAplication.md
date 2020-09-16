@@ -90,10 +90,55 @@ docker tag java-demon:v1 seven7num/java-demon:v1
 
 
 ## 部署应用到k8s
-1.部署deployment
+1.部署java应用的deployment
 ```shell
 #创建应用
-kubectl create deployment web --image=seven7num/java-demon:v1  
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: web
+  name: java-demon
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: web
+      project: java
+  template:
+    metadata:
+      labels:
+        app: web
+        project: java
+    spec:
+      containers:
+      - image: seven7num/java-demon:v3
+        name: java-demon
+        imagePullPolicy: IfNotPresent
+        env:
+         - name: DEMO_GREETING
+           value: "Hello from the environment"
+         - name: DEMO_FAREWELL
+           value: "Such a sweet sorrow"
+        resources:
+          requests:
+            memory: "1Gi"
+            cpu: "0.5"
+          limits:
+            memory: "10Gi"
+            cpu: "1"
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 8080
+          initialDelaySeconds: 60
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 8080
+          initialDelaySeconds: 60
+          periodSeconds: 10
 
 #查看pod详情
 kubectl describe pod web
@@ -107,15 +152,157 @@ kubectl get pod
 2.发布应用
 ```shell
 #发布应用并暴露端口
-kubectl expose deployment web --port=80 --target-port=8080 --type=NodePort 
+apiVersion: v1
+kind: Service
+metadata:
+  name: java-demon
+spec:
+  selector:
+    app: web
+    project: java
+  ports:
+    - protocol: TCP
+      port: 80
+      nodePort: 30010
+      targetPort: 8080
+  type: NodePort 
+
 
 #查看应用
 kubectl get service
 
-#访问页面
-curl http://nodeip
+
 ```
 
 
 
+3.部署pv持久存储
+```shell
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: mysql-pv
+spec:
+  capacity:
+    storage: 5Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: /data
 
+```
+
+
+
+4.利用secret部署mysql的deployment，service以及pvc
+```shell
+apiVersion: v1
+kind: Secret
+metadata:
+  name: java-demon-db 
+  namespace: default
+type: Opaque
+data:
+  mysql-root-password: "MTIzNDU2"
+  mysql-password: "MTIzNDU2"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: java-demon-db 
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      project: www
+      app: mysql
+  template:
+    metadata:
+      labels:
+        project: www
+        app: mysql
+    spec:
+      containers:
+      - name: db
+        image: mysql:5.7.30
+        resources:
+          requests:
+            cpu: 500m
+            memory: 512Mi
+          limits: 
+            cpu: 500m
+            memory: 512Mi
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: java-demon-db
+              key: mysql-root-password
+        - name: MYSQL_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: java-demon-db
+              key: mysql-password
+        - name: MYSQL_USER
+          value: "qihao"
+        - name: MYSQL_DATABASE
+          value: "k8s"
+        ports:
+        - name: mysql
+          containerPort: 3306
+        livenessProbe:
+          exec:
+            command:
+            - sh
+            - -c
+            - "mysqladmin ping -u root -p${MYSQL_ROOT_PASSWORD}"
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        readinessProbe:
+          exec:
+            command:
+            - sh
+            - -c
+            - "mysqladmin ping -u root -p${MYSQL_ROOT_PASSWORD}"
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        volumeMounts:
+        - name: data
+          mountPath: /var/lib/mysql
+        
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: mysql-pv-claim
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mysql-pv-claim
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: java-demon-db
+  namespace: default
+spec:
+  type: ClusterIP
+  ports:
+  - name: mysql
+    port: 3306
+    targetPort: mysql
+  selector:
+    project: www
+    app: mysql 
+
+```
+
+#访问页面
+curl http://nodeip
