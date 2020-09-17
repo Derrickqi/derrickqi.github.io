@@ -77,7 +77,34 @@ docker build -t java-demo:v1 .
 
 
 
-3.将镜像推送到自己得私有仓库
+3.修改java应用连接数据库信息
+
+```shell
+server:
+  port: 8080
+spring:
+  datasource:
+    url: jdbc:mysql://java-demon-db:3306/test?characterEncoding=utf-8  #定义数据库信息
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.jdbc.Driver
+  freemarker:
+    allow-request-override: false
+    cache: true
+    check-template-location: true
+    charset: UTF-8
+    content-type: text/html; charset=utf-8
+    expose-request-attributes: false
+    expose-session-attributes: false
+    expose-spring-macro-helpers: false
+    suffix: .ftl
+    template-loader-path:
+      - classpath:/templates/
+
+```
+
+
+4.将镜像推送到自己得私有仓库
 ```
 #登陆dockerHub
 docker login
@@ -85,6 +112,10 @@ docker login
 
 #将构建的镜像打tag
 docker tag java-demon:v1 seven7num/java-demon:v1
+
+
+#将镜像推送至DockerHub仓库
+docker push seven7num/java-demon:v1
 ```
 
 
@@ -112,7 +143,7 @@ spec:
         project: java
     spec:
       containers:
-      - image: seven7num/java-demon:v3
+      - image: seven7num/java-demon:v1
         name: java-demon
         imagePullPolicy: IfNotPresent
         env:
@@ -188,6 +219,7 @@ spec:
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Recycle
   hostPath:
     path: /data
 
