@@ -1,6 +1,6 @@
 ---
 layout:     post   				    # 使用的布局（不需要改）
-title:      正确编写DockerFile 				# 标题 
+title:      正确的姿势编写DockerFile 				# 标题 
 subtitle:   DockerFile案例 #副标题
 date:       2022-01-11 				# 时间
 author:     Derrick 				# 作者
@@ -12,9 +12,14 @@ tags:								#标签
 ---
 
 ## DockerFile案例
+
+
+
 1. **将启动Docker容器，同时开启Docker容器对外的22端口的监听，实现通过CRT或者Xshell登录。**
 
-Docker服务端创建Dockerfile文件，实现容器运行开启22端口，内容如下： 
+
+
+
 ```shell
 #设置基本的镜像，后续命令都以这个镜像为基础
 
@@ -49,17 +54,12 @@ CMD /usr/sbin/sshd -D
 
 
 
-基于Dockerfile来创建生成镜像，命令如下：
 
-用docker build根据Dockerfile创建镜像(centos:ssh)：
 
-docker  build  -t  centos:ssh  -  <  Dockerfile
-
-docker  build  -t  centos:ssh  .
+2. **开启SSH 6379端口，让Redis端口对外访问，Dockerfile内容如下：**
 
 
 
-2. 开启SSH 6379端口，让Redis端口对外访问，Dockerfile内容如下：
 ```shell
 FROM centos:latest
 
@@ -115,7 +115,13 @@ CMD /usr/sbin/sshd;/usr/local/redis/bin/redis-server /usr/local/redis/etc/redis.
 ```
 
 
-3. 基于Dockerfile开启Nginx 80端口，并远程连接服务器，dockerfile内容如下： 
+
+
+3. **基于Dockerfile开启Nginx 80端口，并远程连接服务器，dockerfile内容如下：**
+
+
+
+
 ```shell
 FROM centos:latest
 
@@ -163,7 +169,12 @@ CMD /usr/local/nginx/sbin/nginx;/usr/sbin/sshd -D
 ```
 
 
-4. Dockerfile来生成mysql镜像并启动运行
+
+
+4. **Dockerfile来生成mysql镜像并启动运行**
+
+
+
 
 ```shell
 FROM centos:v1
