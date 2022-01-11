@@ -28,11 +28,11 @@ FROM centos
 
 MAINTAINER  SeVen7nu.github.io
 
-#安装依赖工具&删除默认YUM源，使用YUM源为国内163 YUM源；
+#安装依赖工具&删除默认YUM源，使用YUM源为国内阿里云 YUM源；
 
 RUN rpm --rebuilddb;yum install make wget tar gzip passwd openssh-server gcc -y
 
-RUN rm -rf /etc/yum.repos.d/*;wget -P /etc/yum.repos.d/ http://mirrors.163.com/.help/CentOS7-Base-163.repo
+RUN rm -rf /etc/yum.repos.d/*;wget -P /etc/yum.repos.d/ https://mirrors.aliyun.com/repo/Centos-8.repo
 
 #配置SSHD&修改root密码为123456
 
@@ -64,13 +64,13 @@ FROM centos:latest
 
 MAINTAINER  SeVen7nu.github.io
 
-#安装依赖工具&删除默认YUM源，使用YUM源为国内163 YUM源；
+#安装依赖工具&删除默认YUM源，使用YUM源为国内阿里云 YUM源；
 
 RUN rpm --rebuilddb;yum install make wget tar gzip passwd openssh-server gcc -y
 
-RUN rm -rf /etc/yum.repos.d/*;wget -P /etc/yum.repos.d/ http://mirrors.163.com/.help/CentOS7-Base-163.repo
+RUN rm -rf /etc/yum.repos.d/*;wget -P /etc/yum.repos.d/ https://mirrors.aliyun.com/repo/Centos-8.repo
 
-#配置SSHD&修改root密码为1qaz@WSX
+#配置SSHD&修改root密码为123456
 
 RUN ssh-keygen -q -t rsa -b 2048 -f /etc/ssh/ssh_host_rsa_key -N ''
 
@@ -78,7 +78,7 @@ RUN ssh-keygen -q -t ecdsa -f /etc/ssh/ssh_host_ecdsa_key -N ''
 
 RUN ssh-keygen -q -t ed25519 -f /etc/ssh/ssh_host_ED25519_key -N ''
 
-RUN echo '1qaz@WSX' | passwd --stdin root
+RUN echo '123456' | passwd --stdin root
 
 #Redis官网下载Redis最新版本软件；
 
@@ -125,13 +125,13 @@ FROM centos:latest
 
 MAINTAINER  SeVen7nu.github.io
 
-#安装依赖工具&删除默认YUM源，使用YUM源为国内163 YUM源；
+#安装依赖工具&删除默认YUM源，使用YUM源为国内阿里云 YUM源；
 
 RUN rpm --rebuilddb;yum install make wget tar gzip passwd openssh-server gcc pcre-devel open
 
 ssl-devel net-tools -y
 
-RUN rm -rf /etc/yum.repos.d/*;wget -P /etc/yum.repos.d/ http://mirrors.163.com/.help/CentOS7-Base-163.repo
+RUN rm -rf /etc/yum.repos.d/*;wget -P /etc/yum.repos.d/ https://mirrors.aliyun.com/repo/Centos-8.repo
 
 #配置SSHD&修改root密码为123456
 
