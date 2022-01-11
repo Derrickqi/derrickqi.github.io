@@ -65,7 +65,7 @@ FROM centos:latest
 
 #作者信息
 
-MAINTAINER  WWW.JFEDU.NET
+MAINTAINER  SeVen7nu.github.io
 
 #安装依赖工具&删除默认YUM源，使用YUM源为国内163 YUM源；
 
@@ -121,7 +121,7 @@ FROM centos:latest
 
 #作者信息
 
-MAINTAINER  WWW.JFEDU.NET
+MAINTAINER  SeVen7nu.github.io
 
 #安装依赖工具&删除默认YUM源，使用YUM源为国内163 YUM源；
 
