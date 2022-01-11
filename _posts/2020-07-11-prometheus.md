@@ -1,7 +1,7 @@
 ---
 layout:     post   				    # 使用的布局（不需要改）
-title:      从零搭建Prometheus监控系统 				# 标题 
-subtitle:   Prometheus+Grafana监控Docker容器及主机 #副标题
+title:      Prometheus+Grafana监控Docker容器及主机(1) 				# 标题 
+subtitle:   从零构建监控体系 #副标题
 date:       2020-07-11 				# 时间
 author:     Derrick 				# 作者
 header-img: img/post-bg-travel-1.jpg 	#这篇文章标题背景图片
