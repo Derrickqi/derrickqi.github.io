@@ -15,7 +15,8 @@ tags:								#标签
 
 
 
-1. **将启动Docker容器，同时开启Docker容器对外的22端口的监听，实现通过CRT或者Xshell登录。**
+
+一. **将启动Docker容器，同时开启Docker容器对外的22端口的监听，实现通过CRT或者Xshell登录。**
 
 
 
@@ -56,7 +57,7 @@ CMD /usr/sbin/sshd -D
 
 
 
-2. **开启SSH 6379端口，让Redis端口对外访问，Dockerfile内容如下：**
+二. **开启SSH 6379端口，让Redis端口对外访问，Dockerfile内容如下：**
 
 
 
@@ -117,7 +118,7 @@ CMD /usr/sbin/sshd;/usr/local/redis/bin/redis-server /usr/local/redis/etc/redis.
 
 
 
-3. **基于Dockerfile开启Nginx 80端口，并远程连接服务器，dockerfile内容如下：**
+三. **基于Dockerfile开启Nginx 80端口，并远程连接服务器，dockerfile内容如下：**
 
 
 
@@ -171,7 +172,7 @@ CMD /usr/local/nginx/sbin/nginx;/usr/sbin/sshd -D
 
 
 
-4. **Dockerfile来生成mysql镜像并启动运行**
+四. **Dockerfile来生成mysql镜像并启动运行**
 
 
 
