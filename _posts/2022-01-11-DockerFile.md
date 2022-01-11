@@ -203,3 +203,18 @@ EXPOSE 3306
 
 CMD ["mysqld", "--datadir=/var/lib/mysql", "--user=mysql"]
 ```
+
+
+
+
+### Docker遇到的问题及解决方法
+
+
+
+**报错内容： System has not been booted with systemd as init system (PID 1). Can't operate.Failed to connect to bus: Host is down**
+
+
+
+
+**解决方法：docker run -itd   --privileged --name myCentos centos /usr/sbin/init**
+原因就是： 默认情况下，在第一步执行的是 /bin/bash，而因为docker中的bug，无法使用systemctl;所以我们使用了 /usr/sbin/init 同时 --privileged 这样就能够使用systemctl了，但覆盖了默认的 /bin/bash;因此我们如果想进入容器 就不能再使用 docker attach myCentos 
