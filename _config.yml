@@ -1,7 +1,7 @@
 # Site settings
 title: Derrick Blog                      #你博客的标题
 SEOTitle: 齐浩的博客 | Derrick Blog       #显示在浏览器上搜索的时候显示的标题
-header-img: img/post-bg-6.jpg    #显示在首页的背景图片
+header-img: img/post-bg-homepage.jpg    #显示在首页的背景图片
 email: seven_num@163.com
 description: "Every failure is leading towards success."  #网站介绍
 keyword: "Derrick, Derrick Blog, 齐浩的博客, SeVen7nu, 齐浩, shell, python, Linux" #关键词
