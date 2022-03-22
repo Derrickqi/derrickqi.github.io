@@ -1,6 +1,6 @@
 ---
 layout:     post   				    # 使用的布局（不需要改）
-title:      Prometheus+Grafana监控Docker容器及主机(1) 				# 标题 
+title:      Prometheus+Grafana监控容器及主机(1) 				# 标题 
 subtitle:   从零构建监控体系 #副标题
 date:       2022-03-22 				# 时间
 author:     Derrick 				# 作者
@@ -38,14 +38,15 @@ Prometheus目前在开源社区相当活跃。
 
 
 
-**1.准备两台linux操作系统，本文均使用CentOS7版本。**
+**1.1准备两台linux操作系统，本文均使用CentOS7版本。**
 
 |  HostName| IP  |
 | :----: | :----: | 
 | master  | 192.168.124.4 |
 | node1  | 192.168.124.5 |
-<br/><br/>
-**2.Docker部署Prometheus（master机器）**
+
+
+**2.1Docker部署Prometheus（master机器）**
 
 ```shell
 docker run -d \
@@ -55,7 +56,7 @@ docker run -d \
 seven7num/prometheus
 ```
 <br/>
-**编辑prometheus.yml配置文件**
+**2.2编辑prometheus.yml配置文件**
 
 ```shell
 .
@@ -83,11 +84,11 @@ scrape_configs:
 .
 ```
 <br/>
-**访问master的9090端口**
+**2.3访问master的9090端口**
 
 ![img](/img/2020-07-11-prometheus/prometheus1.png)
 <br/>
-**3.部署node_exporter（master和node）**
+**3.1部署node_exporter（master和node）**
 
 ```shell
 [root@prometheus-4 ~]# tar -xf node_exporter-1.0.1.linux-amd64.tar.gz
@@ -115,13 +116,12 @@ tcp6       0      0 :::9100                 :::*                    LISTEN      
 ```
 <br/>
 
-**访问master及node端的9100端口**
+**3.2访问master及node端的9100端口暴露出的监控指标**
 ![img](/img/2020-07-11-prometheus/node_exporter1.png)
 
-**图为node通过9100端口暴露出的监控指标**
 ![img](/img/2020-07-11-prometheus/node_exporter2.png)
 
-**再次访问master的9090端口**
+**3.4再次访问master的9090端口**
 ![img](/img/2020-07-11-prometheus/prometheus2.png)
 
 
@@ -137,16 +137,13 @@ docker run -d \
 seven7num/grafana
 ```
 <br/>
-**访问master的3000端口,默认账号密码都为admin**
-
+**4.1访问master的3000端口,默认账号密码都为admin**
 ![img](/img/2020-07-11-prometheus/Grafana1.png)
 <br/>
-**点击设置，将URL改为http://192.168.124.4:9090并保存**
-
+**4.2点击设置，将URL改为http://192.168.124.4:9090并保存**
 ![img](/img/2020-07-11-prometheus/Grafana2.png)
 <br/>
-**点击Import导入默认模板(代码为9276），并且保存**
-
+**4.3点击Import导入默认模板(代码为9276），并且保存**
 ![img](/img/2020-07-11-prometheus/Grafana3.png)
 
 ![img](/img/2020-07-11-prometheus/Grafana4.png)
@@ -158,11 +155,12 @@ seven7num/grafana
 
 <br/><br/><br/>
 #### 二. 监控主机容器
-`cAdvisor`（Container Advisor）用于采集正在运行的容器资源使用和性能信息。
-`cAdvisor`可以对节点机器上的资源及容器进行实时监控和性能数据采集，包括`CPU使用情况`、`内存使用情况`、`网络吞吐量`及`文件系统使用情况`.
+**`cAdvisor`（Container Advisor）用于采集正在运行的容器资源使用和性能信息。**
+
+**`cAdvisor`可以对节点机器上的资源及容器进行实时监控和性能数据采集，包括`CPU使用情况`、`内存使用情况`、`网络吞吐量`及`文件系统使用情况`.**
 
 
-**1.Docker部署Cadvisor**
+**1.1Docker部署Cadvisor**
 ```shell
 docker run -d \
 --volume=/:/rootfs:ro \
@@ -178,19 +176,17 @@ google/cadvisor:latest
 ```
 <br/>
 
-**访问node节点的8080端口**
-
+**1.2访问node节点的8080端口**
 ![img](/img/2020-07-11-prometheus/cadvisor1.png)
 
 ![img](/img/2020-07-11-prometheus/cadvisor2.png)
 
-**同样cadvisor也会有同样的监控指标,访问http://192.168.124.5:8080/metrics**
-
+**1.3同样cadvisor也会有监控指标,访问http://192.168.124.5:8080/metrics**
 ![img](/img/2020-07-11-prometheus/cadvisor3.png)
 
 
 <br/>
-2.**修改prometheus.yml,在末尾添加**
+**2.1修改prometheus.yml,在末尾添加容器信息**
 
 ```shell
 .
@@ -204,19 +200,15 @@ google/cadvisor:latest
 .
 ```
 
-**3.再次访问master的9090端口，可以看到容器监控指标已经显示出来了**
-
+**3.1再次访问master的9090端口，可以看到容器监控指标**
 ![img](/img/2020-07-11-prometheus/cadvisor4.png)
 
 <br/>
 
-**然后在master主机登录Grafana，导入Docker监模板，id：193**
-
+**3.2登录Grafana,导入Docker监模板,id：193**
 ![img](/img/2020-07-11-prometheus/Grafana6.png)
 
 ![img](/img/2020-07-11-prometheus/Grafana7.png)
-<br/>
-**这样我们就可以看到Grafana已经同步被监控端的容器信息**
 
 ![img](/img/2020-07-11-prometheus/Grafana8.png)
 
