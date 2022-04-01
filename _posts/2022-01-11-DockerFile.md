@@ -151,38 +151,43 @@ CMD /usr/local/nginx/sbin/nginx;/usr/sbin/sshd -D
 
 
 
-```shell
+```
+#设置基本的镜像
 FROM centos:7
 
-RUN groupadd -r mysql && useradd -r -g mysql mysql
+#作者信息
+MAINTAINER  SeVen7nu.github.io
 
-RUN rpm --rebuilddb;yum install -y gcc zlib-devel gd-devel
+#安装依赖工具
 
-ENV MYSQL_MAJOR 5.6
+RUN yum -y install openssh-server net-tools passwd vim wget 
 
-ENV MYSQL_VERSION 5.6.20
+#配置SSHD&修改root密码为123456
+RUN ssh-keygen -t rsa -b 2048 -f /root/.ssh/id_rsa.key -N ''
 
-RUN curl -SL "http://dev.mysql.com/get/Downloads/MySQL-$MYSQL_MAJOR/mysql-$MYSQL_VERSION-linux-glibc2.5-x86_64.tar.gz" -o mysql.tar.gz \
+#启动SSHD服务进程，对外暴露22端口；
+RUN echo "123" | passwd root --stdin
 
-&&  curl -SL "http://mysql.he.net/Downloads/MySQL-$MYSQL_MAJOR/mysql-$MYSQL_VERSION-linux-glibc2.5-x86_64.tar.gz.asc" -o mysql.tar.gz.asc \
+#下载MysqlRpm安装包
+RUN wget -P /tmp https://downloads.mysql.com/archives/get/p/23/file/mysql-5.7.36-1.el7.x86_64.rpm-bundle.tar \
 
-&&  mkdir /usr/local/mysql \
+&&  mkdir /tmp/mysqlData \
 
-&&  tar -xzf mysql.tar.gz -C /usr/local/mysql \
+&&  tar -xvf mysql-5.7.36-1.el7.x86_64.rpm-bundle.tar -C /tmp/mysqlData \
 
-&&  rm mysql.tar.gz* \
+&&  yum -y install /tmp/mysqlData/* 
 
-ENV PATH $PATH:/usr/local/mysql/bin:/usr/local/mysql/scripts
-
-WORKDIR /usr/local/mysql
-
+#挂载容器内部目录
 VOLUME /var/lib/mysql
+
+#暴漏端口22，3306
+EXPOSE 22
 
 EXPOSE 3306
 
-CMD ["mysqld", "--datadir=/var/lib/mysql", "--user=mysql"]
+#启动mysql服务
+CMD systemctl enabled mysqld && systemctl start mysqld
 ```
-
 
 
 
