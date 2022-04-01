@@ -22,25 +22,19 @@ tags:								#标签
 ```shell
 #设置基本的镜像，后续命令都以这个镜像为基础
 
-FROM centos
+FROM centos:7
 
 #作者信息
 
 MAINTAINER  SeVen7nu.github.io
 
-#安装依赖工具&删除默认YUM源，使用YUM源为国内阿里云 YUM源；
+#安装依赖工具
 
-RUN rpm --rebuilddb;yum install make wget tar gzip passwd openssh-server gcc -y
-
-RUN rm -rf /etc/yum.repos.d/*;wget -P /etc/yum.repos.d/ https://mirrors.aliyun.com/repo/Centos-8.repo
+RUN yum -y install openssh-server net-tools passwd
 
 #配置SSHD&修改root密码为123456
 
 RUN yes|ssh-keygen -q -t rsa -b 2048 -f /etc/ssh/ssh_host_rsa_key -N ''
-
-RUN yes|ssh-keygen -q -t ecdsa -f /etc/ssh/ssh_host_ecdsa_key -N ''
-
-RUN yes|ssh-keygen -q -t ed25519 -f /etc/ssh/ssh_host_ed25519_key -N ''
 
 RUN echo '123456' | passwd --stdin root
 
@@ -51,32 +45,27 @@ EXPOSE  22
 CMD /usr/sbin/sshd -D
 ```
 
-
-
+**特权模式启动容器**
+**docker run -itd   --privileged --name myCentos centos /usr/sbin/init**
+<br/><br/><br/>
 ### 1.2 **开启SSH 6379端口，让Redis端口对外访问，Dockerfile内容如下：**
 
 
 
 ```shell
-FROM centos:latest
+FROM centos:7
 
 #作者信息
 
 MAINTAINER  SeVen7nu.github.io
 
-#安装依赖工具&删除默认YUM源，使用YUM源为国内阿里云 YUM源；
+#安装依赖工具
 
-RUN rpm --rebuilddb;yum install make wget tar gzip passwd openssh-server gcc -y
-
-RUN rm -rf /etc/yum.repos.d/*;wget -P /etc/yum.repos.d/ https://mirrors.aliyun.com/repo/Centos-8.repo
+RUN yum -y install openssh-server net-tools passwd
 
 #配置SSHD&修改root密码为123456
 
-RUN ssh-keygen -q -t rsa -b 2048 -f /etc/ssh/ssh_host_rsa_key -N ''
-
-RUN ssh-keygen -q -t ecdsa -f /etc/ssh/ssh_host_ecdsa_key -N ''
-
-RUN ssh-keygen -q -t ed25519 -f /etc/ssh/ssh_host_ED25519_key -N ''
+RUN yes|ssh-keygen -q -t rsa -b 2048 -f /etc/ssh/ssh_host_rsa_key -N ''
 
 RUN echo '123456' | passwd --stdin root
 
@@ -112,34 +101,26 @@ CMD /usr/sbin/sshd;/usr/local/redis/bin/redis-server /usr/local/redis/etc/redis.
 ```
 
 
-
+<br/><br/><br/>
 ### 1.3 **基于Dockerfile开启Nginx 80端口，并远程连接服务器，dockerfile内容如下：**
 
 
 
 
 ```shell
-FROM centos:latest
+FROM centos:7
 
 #作者信息
 
 MAINTAINER  SeVen7nu.github.io
 
-#安装依赖工具&删除默认YUM源，使用YUM源为国内阿里云 YUM源；
+#安装依赖工具
 
-RUN rpm --rebuilddb;yum install make wget tar gzip passwd openssh-server gcc pcre-devel open
-
-ssl-devel net-tools -y
-
-RUN rm -rf /etc/yum.repos.d/*;wget -P /etc/yum.repos.d/ https://mirrors.aliyun.com/repo/Centos-8.repo
+RUN yum -y install openssh-server net-tools passwd
 
 #配置SSHD&修改root密码为123456
 
 RUN yes|ssh-keygen -q -t rsa -b 2048 -f /etc/ssh/ssh_host_rsa_key -N ''
-
-RUN yes|ssh-keygen -q -t ecdsa -f /etc/ssh/ssh_host_ecdsa_key -N ''
-
-RUN yes|ssh-keygen -q -t ed25519 -f /etc/ssh/ssh_host_ed25519_key -N ''
 
 RUN echo '123456' | passwd --stdin root
 
@@ -165,13 +146,13 @@ CMD /usr/local/nginx/sbin/nginx;/usr/sbin/sshd -D
 ```
 
 
-
+<br/><br/><br/>
 ### 1.4 **Dockerfile来生成mysql镜像并启动运行**
 
 
 
 ```shell
-FROM centos:v1
+FROM centos:7
 
 RUN groupadd -r mysql && useradd -r -g mysql mysql
 
@@ -181,17 +162,15 @@ ENV MYSQL_MAJOR 5.6
 
 ENV MYSQL_VERSION 5.6.20
 
-RUN
+RUN curl -SL "http://dev.mysql.com/get/Downloads/MySQL-$MYSQL_MAJOR/mysql-$MYSQL_VERSION-linux-glibc2.5-x86_64.tar.gz" -o mysql.tar.gz \
 
-&& curl -SL "http://dev.mysql.com/get/Downloads/MySQL-$MYSQL_MAJOR/mysql-$MYSQL_VERSION-linux-glibc2.5-x86_64.tar.gz" -o mysql.tar.gz \
+&&  curl -SL "http://mysql.he.net/Downloads/MySQL-$MYSQL_MAJOR/mysql-$MYSQL_VERSION-linux-glibc2.5-x86_64.tar.gz.asc" -o mysql.tar.gz.asc \
 
-&& curl -SL "http://mysql.he.net/Downloads/MySQL-$MYSQL_MAJOR/mysql-$MYSQL_VERSION-linux-glibc2.5-x86_64.tar.gz.asc" -o mysql.tar.gz.asc \
+&&  mkdir /usr/local/mysql \
 
-&& mkdir /usr/local/mysql \
+&&  tar -xzf mysql.tar.gz -C /usr/local/mysql \
 
-&& tar -xzf mysql.tar.gz -C /usr/local/mysql \
-
-&& rm mysql.tar.gz* \
+&&  rm mysql.tar.gz* \
 
 ENV PATH $PATH:/usr/local/mysql/bin:/usr/local/mysql/scripts
 
@@ -207,14 +186,9 @@ CMD ["mysqld", "--datadir=/var/lib/mysql", "--user=mysql"]
 
 
 
-### Docker遇到的问题及解决方法
-
-
-
-**报错内容： System has not been booted with systemd as init system (PID 1). Can't operate.Failed to connect to bus: Host is down**
 
 
 
 
-**解决方法：docker run -itd   --privileged --name myCentos centos /usr/sbin/init**
-原因就是： 默认情况下，在第一步执行的是 /bin/bash，而因为docker中的bug，无法使用systemctl;所以我们使用了 /usr/sbin/init 同时 --privileged 这样就能够使用systemctl了，但覆盖了默认的 /bin/bash;因此我们如果想进入容器 就不能再使用 docker attach myCentos 
+
+
