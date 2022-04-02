@@ -8,7 +8,6 @@ header-img: img/post-bg-docker.jpg 	#这篇文章标题背景图片
 catalog: true 						# 是否归档
 tags:								#标签
     - Docker
-    - 虚拟化
 ---
 
 # DockerFile案例
@@ -30,7 +29,7 @@ MAINTAINER  SeVen7nu.github.io
 
 #安装依赖工具
 
-RUN yum -y install openssh-server net-tools passwd
+RUN yum -y install wget vim openssh-server net-tools passwd
 
 #配置SSHD&修改root密码为123456
 
@@ -169,13 +168,17 @@ RUN ssh-keygen -t rsa -b 2048 -f /root/.ssh/id_rsa.key -N ''
 RUN echo "123" | passwd root --stdin
 
 #下载MysqlRpm安装包
-RUN wget -P /tmp https://downloads.mysql.com/archives/get/p/23/file/mysql-5.7.36-1.el7.x86_64.rpm-bundle.tar \
+ADD https://downloads.mysql.com/archives/get/p/23/file/mysql-5.7.36-1.el7.x86_64.rpm-bundle.tar /tmp 
 
-&&  mkdir /tmp/mysqlData \
+RUN mkdir /tmp/mysqlData
 
-&&  tar -xvf mysql-5.7.36-1.el7.x86_64.rpm-bundle.tar -C /tmp/mysqlData \
+WORKDIR /tmp
 
-&&  yum -y install /tmp/mysqlData/* 
+RUN tar -xvf mysql-5.7.36-1.el7.x86_64.rpm-bundle.tar -C /tmp/mysqlData
+
+RUN yum repolist
+
+RUN yum -y install /tmp/mysqlData/* 
 
 #挂载容器内部目录
 VOLUME /var/lib/mysql
@@ -186,7 +189,7 @@ EXPOSE 22
 EXPOSE 3306
 
 #启动mysql服务
-CMD systemctl enabled mysqld && systemctl start mysqld
+CMD systemctl start mysqld &
 ```
 
 

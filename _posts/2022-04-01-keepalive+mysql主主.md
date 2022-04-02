@@ -1,6 +1,6 @@
 ---
 layout:     post   				    # 使用的布局（不需要改）
-title:      Keepalived + mysql主主（生产环境） 	# 标题 
+title:      Keepalived高可用 + mysql主主（生产环境） 	# 标题 
 subtitle:   实现数据库高可用 	#副标题
 date:       2022-04-01				# 时间
 author:     Derrick 				# 作者
@@ -46,13 +46,13 @@ log_bin = mysql-bin 	#开启binglog日志
 ```
 
 ```
-mysql> CREATE USER 'replica'@'172.17.0.3' identified by '123qqq...A';
+mysql> CREATE USER 'replica'@'172.17.0.3' identified by '1@z4d$42hgs';
 
-mysql> ALTER USER 'replica'@'172.17.0.3' IDENTIFIED WITH mysql_native_password BY '123qqq...A';
+mysql> ALTER USER 'replica'@'172.17.0.3' IDENTIFIED WITH mysql_native_password BY '1@z4d$42hgs';
 
 mysql> grant replication slave on *.* to replica@'172.17.0.3';
 
-mysql> CHANGE MASTER TO MASTER_HOST='172.17.0.3',MASTER_USER='replica',MASTER_PASSWORD='123qqq...A',MASTER_LOG_FILE='mysql-bin.000005',MASTER_LOG_POS=154;
+mysql> CHANGE MASTER TO MASTER_HOST='172.17.0.3',MASTER_USER='replica',MASTER_PASSWORD='1@z4d$42hgs',MASTER_LOG_FILE='mysql-bin.000005',MASTER_LOG_POS=154;
 
 
 
@@ -93,15 +93,15 @@ log_bin = mysql-bin        #开启binglog日志
 ```
 
 ```
-mysql> CREATE USER 'replica'@'172.17.0.2' identified by '123qqq...A';
+mysql> CREATE USER 'replica'@'172.17.0.2' identified by '1@z4d$42hgs';
 
 
-mysql> ALTER USER 'replica'@'172.17.0.2' IDENTIFIED WITH mysql_native_password BY '123qqq...A';
+mysql> ALTER USER 'replica'@'172.17.0.2' IDENTIFIED WITH mysql_native_password BY '1@z4d$42hgs';
 
 
 mysql> grant replication slave on *.* to replica@'172.17.0.2';
 
-mysql> CHANGE MASTER TO MASTER_HOST='172.17.0.2',MASTER_USER='replica',MASTER_PASSWORD='123qqq...A',MASTER_LOG_FILE='mysql-bin.000004',MASTER_LOG_POS=154;
+mysql> CHANGE MASTER TO MASTER_HOST='172.17.0.2',MASTER_USER='replica',MASTER_PASSWORD='1@z4d$42hgs',MASTER_LOG_FILE='mysql-bin.000004',MASTER_LOG_POS=154;
 
 mysql> show master status\G;
 *************************** 1. row ***************************
