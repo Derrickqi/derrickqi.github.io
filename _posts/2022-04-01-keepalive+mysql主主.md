@@ -150,27 +150,27 @@ global_defs {
 }
 
 vrrp_script chk_mysql {
-    script "/etc/keepalived/check_mysql.sh" 
-    interval 2       
-    weight 2           
+    script "/etc/keepalived/check_mysql.sh"     #该脚本检测mysql的运行状态
+    interval 2             #每2s检测一次
+    weight 2               #检测失败（脚本返回非0）则优先级2
 }
 
 vrrp_instance VI_1 {
-    state BACKUP
-    interface eth0             
-    virtual_router_id 54    
-    priority 100                  
-    advert_int 1            
+    state MASTER      #指定keepalived的角色，MASTER表示此主机是主服务器
+    interface eth0             #指定HA监测网络的接口
+    virtual_router_id 54    #虚拟路由标识，这个标识是一个数字，同一个vrrp实例使用唯一的标识。即同一vrrp_instance下，MASTER和BACKUP必须是一致的
+    priority 100       #定义优先级，数字越大，优先级越高，在同一个vrrp_instance下，MASTER的优先级必须大于BACKUP的优先级            
+    advert_int 1        #设定MASTER与BACKUP负载均衡器之间同步检查的时间间隔，单位是秒    
     nopreempt
-    authentication {        
-        auth_type PASS      
-        auth_pass 1111
+    authentication {        #设置验证类型和密码
+        auth_type PASS      #设置验证类型，主要有PASS和AH两种
+        auth_pass 1111      #设置验证密码，在同一个vrrp_instance下，MASTER与BACKUP必须使用相同的密码才能正常通信
     }
-    virtual_ipaddress {
+    virtual_ipaddress {     #设置虚拟IP地址，可以设置多个虚拟IP地址，每行一个
         172.17.0.100
     }   
     track_script {
-        chk_mysql      
+        chk_mysql           #引用VRRP脚本，即在 vrrp_script 部分指定的名字。
     }   
 }
 ```
@@ -181,7 +181,7 @@ vrrp_instance VI_1 {
 #!/bin/bash
 if [ "$(netstat -nutlp | grep 3306)" == "" ];then
     #echo 1
-    systemctl start mysqld &
+    systemctl start mysqld 
     sleep 5
 
     if [ "$(netstat -nutlp | grep 3306 )" == "" ];then
@@ -233,7 +233,7 @@ vrrp_instance VI_1 {
 #!/bin/bash
 if [ "$(netstat -nutlp | grep 3306)" == "" ];then
     #echo 1
-    systemctl start mysqld &
+    systemctl start mysqld
     sleep 5
 
     if [ "$(netstat -nutlp | grep 3306 )" == "" ];then
