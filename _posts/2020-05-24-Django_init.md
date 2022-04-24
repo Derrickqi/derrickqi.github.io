@@ -51,6 +51,26 @@ tags:								#标签
         ...
 ```
 
+
+
+```
+**修改Django默认数据库为mysql**
+
+mysite/setting.py
+**https://docs.djangoproject.com/en/4.0/ref/settings/**
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'mysql',
+        'USER': 'root',
+        'PASSWORD': '123456',
+        'HOST': '192.168.190.134',
+        'PORT': '3306',
+    }
+}
+
+```
+
 **修改TEMPLATES中的DIRS，以将前端文件统一放在根目录下的templates中。**
 ```python
     mysite/setting.py
