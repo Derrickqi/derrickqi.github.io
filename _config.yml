@@ -62,6 +62,7 @@ kramdown:
 # Gitalk
 gitalk:
  enable: true    #是否开启Gitalk评论
+ autoExpand: true #是否自动展开评论
  clientID: eaa2a5d08f2297528185                         #生成的clientID
  clientSecret: 9ff0559ecaefeb0c30919d9b40cbd2797d56e916    #生成的clientSecret
  repo: SeVen7nu.github.io    #仓库名称
