@@ -57,6 +57,7 @@ kramdown:
 
 # 评论系统
 #Disqus（https://disqus.com/）
+<<<<<<< HEAD
 disqus_username: DerrickQi
 
 # Gitalk
@@ -64,6 +65,15 @@ gitalk:
  enable: true    #是否开启Gitalk评论
  clientID: eaa2a5d08f2297528185                         #生成的clientID
  clientSecret: 9ff0559ecaefeb0c30919d9b40cbd2797d56e916    #生成的clientSecret
+=======
+#disqus_username: DerrickQi
+
+Gitalk
+gitalk:
+ enable: true    #是否开启Gitalk评论
+ clientID: eaa2a5d08f2297528185                            #生成的clientID
+ clientSecret: 88ecd13afdb33f2cbdb195c5472025311b83c853    #生成的clientSecret
+>>>>>>> 81f3756401199ea722651a36df70d20203e5f1e7
  repo: SeVen7nu.github.io    #仓库名称
  owner: SeVen7nu    #github用户名
  admin: SeVen7nu
