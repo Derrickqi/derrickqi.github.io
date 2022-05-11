@@ -69,6 +69,7 @@ gitalk:
  owner: 'SeVen7nu'    #github用户名
  admin: ['DerrickQi']
  distractionFreeMode: true #是否启用类似FB的阴影遮罩
+ proxy: https://netnr-proxy.cloudno.de/https://github.com/login/oauth/access_token
 
 
 # 统计
