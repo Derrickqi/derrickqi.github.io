@@ -24,3 +24,18 @@ header-img: "img/post-bg-travel-5.jpg"
 
 
 
+<div id="container"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+var gitment = new Gitment({
+  id: decodeURI(location.pathname),
+  owner: '{{site.gitalk.owner}}',
+  repo: '{{site.gitalk.repo}}',
+  oauth: {
+    client_id: '{{site.gitalk.clientID}}',
+    client_secret: '{{site.gitalk.clientSecret}}',
+  },
+})
+gitment.render('container')
+</script>
