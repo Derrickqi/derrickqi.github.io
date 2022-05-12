@@ -33,12 +33,13 @@ header-img: "img/post-bg-travel-5.jpg"
     var gitalk = new Gitalk({
 
     // gitalk的主要参数
-		clientID: `eaa2a5d08f2297528185`,
-		clientSecret: `9ff0559ecaefeb0c30919d9b40cbd2797d56e916`,
-		repo: `issues`,
+		clientID: 'eaa2a5d08f2297528185',
+		clientSecret: '9ff0559ecaefeb0c30919d9b40cbd2797d56e916',
+		repo: 'issues',
 		owner: 'SeVen7nu',
 		admin: ['SeVen7nu'],
-		id: 'window.location.pathname',
+        distractionFreeMode: true,
+		id: md5(location.pathname),
     
     });
     gitalk.render('gitalk-container');
