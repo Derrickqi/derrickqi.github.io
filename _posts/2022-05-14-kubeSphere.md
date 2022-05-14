@@ -22,16 +22,16 @@ KubeSphere 是在 Kubernetes 之上构建的面向云原生应用的分布式操
 <br/><br/><br/>
 ## 2. 准备基本环境
 
+
 | 角色       | IP            |
 | ---------- | ------------- |
 | k8s-master | 192.168.1.10 |
 | k8s-node1  | 192.168.1.11 |
 | k8s-node2  | 192.168.1.12 |
 
-环境初始化(仅在master机器)与安装k8s相同详细请参考<a href="http://www.seven7nu.website/2022/01/13/k8sCreate/">使用kubeadm快速部署kubernetesV1.23.1集群</a>
+环境初始化(仅在master机器)与安装k8s相同详细请参考👉<a href="http://www.seven7nu.website/2022/01/13/k8sCreate/">使用kubeadm快速部署kubernetesV1.23.1集群</a>
 <br/><br/><br/>
 ## 3. 准备KubeSphere环境
-<br/>
 
 ### 3.1 下载 KubeKey
 ```
@@ -409,9 +409,8 @@ Password: P@88w0rd
 
 <br/><br/><br/>
 ## 4. 关于踩坑
-<br/>
-
-### 4.1
+ 
+### 4.1 Error:Failed to download kube binaries
 安装时候总是报错`Error:Failed to download kube binaries:......`
 
 解决方法:由于网络延迟导致下载失败;可以尝试手动下载安装到本地,然后上传到服务器,重新执行就奔
@@ -432,7 +431,7 @@ cni-plugins-linux-amd64-v0.9.1.tgz
 ```
 <br/>
 
-### 4.2
+### 4.2 Please wait for the installation to complete
 
 安装时一直卡在`Please wait for the installation to complete <<----`
 
@@ -444,4 +443,4 @@ cni-plugins-linux-amd64-v0.9.1.tgz
 
 
 
-**喜欢作者的文章可以给我点个start哦:grin:!**
+**👉👉👉👉喜欢作者的文章可以给我点个start哦!!!!**
