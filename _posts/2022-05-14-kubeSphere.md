@@ -1,6 +1,6 @@
 ---
 layout:     post   				    # 使用的布局（不需要改）
-title:      Centos操作系统安装KubeSphere			# 标题 
+title:      Centos多节点安装KubeSphere			# 标题 
 subtitle:    All-in-One 模式安装 KubeSphere #副标题
 date:       2022-05-14 				# 时间
 author:     Derrick 				# 作者
@@ -11,7 +11,7 @@ tags:								#标签
 ---
 
 
-# Linux上安装以All-in-One模式安装KubeSphere
+# Linux多节点以All-in-One模式安装KubeSphere
 
 
 
