@@ -73,7 +73,10 @@ spec:
     - node2
 ```
 
-
+**使用 KubeKey 检索集群信息。以下命令会创建配置文件 (sample.yaml)。**
+```
+./kk create config --from-cluster
+```
 
 **备注**
 ```
