@@ -45,7 +45,7 @@ chmod +x kk
 
 ### 3.2 创建多节点集群
 ```
-./kk create cluster --with-kubernetes v1.21.5 --with-kubesphere v3.2.1
+./kk create cluster --with-kubernetes v1.21.5 --with-kubesphere v3.2.1 -f config-sample.yaml
 ```
 
 
@@ -73,10 +73,7 @@ spec:
     - node2
 ```
 
-**使用 KubeKey 检索集群信息。以下命令会创建配置文件 (sample.yaml)。**
-```
-./kk create config --from-cluster
-```
+
 
 **备注**
 ```
