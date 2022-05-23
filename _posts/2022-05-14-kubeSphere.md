@@ -29,13 +29,15 @@ KubeSphere 是在 Kubernetes 之上构建的面向云原生应用的分布式操
 | k8s-node1  | 192.168.1.11 |
 | k8s-node2  | 192.168.1.12 |
 
-环境初始化(仅在master机器)与安装k8s相同详细请参考👉<a href="http://www.seven7nu.website/2022/01/13/k8sCreate/">使用kubeadm快速部署kubernetesV1.23.1集群</a>
+
 <br/><br/><br/>
 ## 3. 准备KubeSphere环境
 
 ### 3.1 下载 KubeKey
 ```
 #下载kk脚本并赋予可执行权限
+export KKZONE=cn
+
 curl -sfL https://get-kk.kubesphere.io | VERSION=v1.2.0 sh -
 
 chmod +x kk
