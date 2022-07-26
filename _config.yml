@@ -8,7 +8,7 @@ description: "Every failure is leading towards success."  #网站介绍
 keyword: "Derrick, Derrick Blog, 齐浩的博客, SeVen7nu, 齐浩, shell, python, Linux" #关键词
 url: "http://SeVen7nu.github.io"          # your host, for absolute URL # 这个就是填写你的博客地址
 baseurl: ""      # for example, '/blog' if your blog hosted on 'host/blog'
-github_repo: "https://github.com/SeVen7nu/SeVen7nu.github.io.git" # you code repository
+github_repo: "https://github.com/Derrickqi/SeVen7nu.github.io" # you code repository
 
 # Sidebar settings
 sidebar: true                           # whether or not using Sidebar.     # 是否开启侧边栏.
@@ -20,7 +20,7 @@ sidebar-avatar: /img/avatar_Drrick.jpg   # use absolute URL, seeing it's used in
 # SNS settings
 RSS: false          
 # weibo_username:     qiubaiying
-github_username:    SeVen7nu
+github_username:    Derrickqi
 facebook_username:  DerrickQi
 #jianshu_username:   e71990ada2fd
 twitter_username:   DerrickQi
