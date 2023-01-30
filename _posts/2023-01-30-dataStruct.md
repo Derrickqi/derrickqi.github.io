@@ -1,7 +1,7 @@
 ---
 layout:     post   				    # 使用的布局（不需要改）
 title:      数据结构 				# 标题 
-subtitle:   单链表基本操作    #副标题
+subtitle:   线性表的顺序表示    #副标题
 date:       2023-01-30 				# 时间
 author:     Derrick 				# 作者
 header-img: img/post-bg-dataStruct.jpg 	#这篇文章标题背景图片
