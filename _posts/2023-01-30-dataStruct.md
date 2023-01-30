@@ -17,6 +17,9 @@ tags:								#标签
 #include <iostream>
 using namespace std;
 #define MaxSize 10 
+
+
+
 typedef struct {
     int data[MaxSize];
     int length;
