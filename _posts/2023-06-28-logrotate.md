@@ -10,7 +10,9 @@ tags:								#标签
     - linux
 ---
 
-## 使用系统自带的logrotate切割日志
+### 使用系统自带的logrotate切割日志
+
+
 
 ```shell
 # cat /etc/logrotate.d/nginx
@@ -32,7 +34,11 @@ tags:								#标签
 
 ```
 
-## logrotate结合crotab对nginx日志进下切割存储
+
+<br/><br/> 
+### logrotate结合crotab对nginx日志进下切割存储
+
+
 
 ```shell
 //crontab -l 
@@ -74,7 +80,11 @@ size(或minsize) log-size            当日志文件到达指定的大小时才�
 size = 5 或 size 5 （>= 5 个字节就转储）
 size = 100k 或 size 100k
 size = 100M 或 size 100M
+
 ```
 
-`注意:` logrotate的最小执行时间为每天执行一次，即使在配置文件中添加size参数 也是按照每天一次切割，需要结合脚本和crontab定时任务缩短切割周期，根据size去切割日志
+
+<br/><br/>
+### 注意
+`注意:` ***logrotate的最小执行时间为每天执行一次，即使在配置文件中添加size参数 也是按照每天一次切割，需要结合脚本和crontab定时任务缩短切割周期，根据size去切割日志***
 
