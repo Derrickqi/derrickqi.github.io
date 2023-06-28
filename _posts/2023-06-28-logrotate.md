@@ -13,7 +13,7 @@ tags:								#标签
 ### 使用系统自带的logrotate切割日志
 
 
-
+<br/><br/>
 ```shell
 # cat /etc/logrotate.d/nginx
 
@@ -39,7 +39,7 @@ tags:								#标签
 ### logrotate结合crotab对nginx日志进下切割存储
 
 
-
+<br/><br/>
 ```shell
 //crontab -l 
 
@@ -48,7 +48,11 @@ tags:								#标签
 ```
 
 
-## logrotate配置常用参数
+### logrotate配置常用参数
+
+
+
+<br/><br/>
 ```
 compress                                   通过gzip 压缩转储以后的日志
 nocompress                                不做gzip压缩处理
